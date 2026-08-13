@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       
     - name: Declare some variables
       id: vars
@@ -24,7 +24,7 @@ jobs:
           echo "sha_short=${sha_short}" >> $GITHUB_OUTPUT
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -33,7 +33,7 @@ jobs:
       run: msbuild /m /p:Configuration=Release /p:Platform=x64 SimpleWindowSwitcher.sln
       
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: sws_bin_amd64_${{ steps.vars.outputs.sha_short }}_${{ steps.vars.outputs.branch }}
         path: |
